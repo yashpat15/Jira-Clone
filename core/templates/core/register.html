@@ -1,0 +1,79 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Jira Clone</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background: #F4F6F8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .register-container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 400px;
+        }
+        .logo {
+            width: 80px;
+            display: block;
+            margin: 0 auto 20px;
+        }
+        .form-control {
+            margin-bottom: 10px;
+            height: 40px;
+            box-shadow: none;
+        }
+        .btn-primary {
+            background-color: #0052CC;
+            border-color: #0052CC;
+            width: 100%;
+            font-weight: 500;
+        }
+        .link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #5E6C84;
+        }
+        .error {
+            color: #FF0000; /* Adding color styling for error messages */
+        }
+    </style>
+</head>
+<body>
+<div class="register-container">
+    <img src="{% static 'images/logo.png' %}" alt="Jira Clone Logo" class="logo">
+    
+    <h2 class="text-center mb-4">Create an account</h2>
+    <form method="post" action="{% url 'register' %}">
+        {% csrf_token %}
+        <div class="form-group">
+            <input type="text" class="form-control" id="username" name="username" placeholder="Username" required>
+        </div>
+        <div class="form-group">
+            <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+        </div>
+        <div class="form-group">
+            <input type="password" class="form-control" id="password2" name="password2" placeholder="Confirm Password" required>
+        </div>
+        {% if error %}
+            <p class="error">{{ error }}</p>
+        {% endif %}
+        <button type="submit" class="btn btn-primary">Register</button>
+        <a href="{% url 'login' %}" class="link">Already have an account? Log in</a>
+    </form>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

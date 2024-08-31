@@ -1,0 +1,112 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="scrum-board">
+    <h1>{{ project.name }} - SCRUM Board</h1>
+    <div class="create-button-container">
+        <button type="button" class="btn btn-primary" id="create-issue-btn">Create</button>
+    </div>
+    
+    <!-- Right-Side Modal -->
+    <div class="issue-creation-panel" id="issueCreationPanel">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">New Issue</h5>
+                <button type="button" class="close" onclick="closePanel()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="create-issue-form" action="{% url 'create_issue_api' project.id %}" method="post" class="issue-form">
+                    {% csrf_token %}
+                    <input type="hidden" name="status" value="to_do">
+                    <input type="hidden" name="assigned_to" value="1"> 
+                    <div class="form-group">
+                        <label for="issueTitle">Summary</label>
+                        <input type="text" class="form-control" id="issueTitle" name="title" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="issueDescription">Description</label>
+                        <textarea class="form-control" id="issueDescription" name="description" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="issueType">Issue Type</label>
+                        <select class="form-control" id="issueType">
+                            <option value="story">Story</option>
+                            <option value="task">Task</option>
+                            <option value="bug">Bug</option>
+                            <option value="epic">Epic</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="issueStatus">Status</label>
+                        <select class="form-control" id="issueStatus">
+                            <option value="todo">To Do</option>
+                            <option value="in_progress">In Progress</option>
+                            <option value="done">Done</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="issueSprint">Sprint</label>
+                        <select class="form-control" id="issueSprint">
+                            <option>Select Sprint</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="issuePoints">Story Points</label>
+                        <input type="number" class="form-control" id="issuePoints" name="points">
+                    </div>
+                    <div class="form-group">
+                        <label for="issueFiles">Attachment</label>
+                        <input type="file" class="form-control-file" id="issueFiles" multiple>
+                    </div>
+                    <button type="submit" class="btn btn-success">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Columns for To Do, In Progress, and Done -->
+    <div class="columns">
+        <div class="column">
+            <h2>To Do</h2>
+            <div class="task-list" id="todo">
+                {% for issue in issues_open %}
+                <div class="task" draggable="true" data-issue-id="{{ issue.id }}">
+                    <h3>{{ issue.title }}</h3>
+                    <p>{{ issue.description }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="column">
+            <h2>In Progress</h2>
+            <div class="task-list" id="in-progress">
+                {% for issue in issues_in_progress %}
+                <div class="task" draggable="true" data-issue-id="{{ issue.id }}">
+                    <h3>{{ issue.title }}</h3>
+                    <p>{{ issue.description }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="column">
+            <h2>Done</h2>
+            <div class="task-list" id="done">
+                {% for issue in issues_closed %}
+                <div class="task" draggable="true" data-issue-id="{{ issue.id }}">
+                    <h3>{{ issue.title }}</h3>
+                    <p>{{ issue.description }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+var project_id = '{{ project.id }}';
+</script>
+<script src="{% static 'core/scripts/drag_and_drop.js' %}"></script>
+{% endblock %}

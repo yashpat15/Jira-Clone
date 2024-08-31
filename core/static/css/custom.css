@@ -1,0 +1,122 @@
+body {
+    background-color: #f4f6f8;
+    color: #333;
+    font-family: 'Arial', sans-serif;
+}
+
+h1 {
+    color: #0052cc;
+    font-size: 28px;
+    text-align: center;
+}
+
+.btn-primary, .btn-success {
+    padding: 0.375rem 0.75rem;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    border-radius: 0.2rem;
+}
+
+.create-button-container {
+    text-align: center; /* Ensures button is centered */
+    width: 100%; /* Full width to allow centering effect */
+    margin-top: 20px; /* Space above the button */
+    margin-bottom: 20px; /* Space below the button */
+}
+
+.card {
+    background-color: #ffffff;
+    transition: box-shadow .3s ease-in-out; /* Smooth transition for hover effect */
+    border-radius: 8px; /* Rounded corners for a modern feel */
+    border: none; /* Removing border for a cleaner look */
+}
+
+.card:hover {
+    box-shadow: 0 8px 16px rgba(0,0,0,.1); /* Subtle shadow for hovering effect */
+}
+
+.container {
+    max-width: 1200px; /* Restricts container width for better layout */
+    margin: auto; /* Centers the container horizontally */
+}
+
+.columns, .board-container {
+    display: flex;
+    justify-content: space-between; /* Spreads columns evenly */
+    padding: 20px; /* Padding around content within columns */
+    background-color: #eef1f7; /* Very light grey background for contrast */
+}
+
+.column, .board-column {
+    background-color: #ffffff;
+    margin: 10px; /* Space between columns */
+    padding: 10px; /* Internal padding for content */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Soft shadow for depth */
+    flex: 1; /* Flex-grow to fill available space */
+}
+
+.task-list, .issue-list {
+    min-height: 500px; /* Minimum height to maintain layout consistency */
+    background-color: #f4f4f4; /* Slightly off-white for differentiation */
+    padding: 10px; /* Padding around the list items */
+    border-radius: 5px; /* Mildly rounded corners for visual comfort */
+    overflow-y: auto; /* Allows vertical scrolling */
+}
+
+.draggable, .task {
+    background-color: #ffffff;
+    border: 1px solid #ddd; /* Light grey border for definition */
+    border-radius: 6px; /* Subtle rounding of corners */
+    padding: 15px; /* Comfortable padding around content */
+    margin-bottom: 10px; /* Space between tasks */
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); /* Soft shadow for 3D effect */
+    transition: transform 0.3s, box-shadow 0.3s; /* Animated transitions for interactions */
+}
+
+.task:hover, .draggable:hover {
+    transform: translateY(-2px); /* Slight lift when hovered */
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.15); /* Enhanced shadow on hover for emphasis */
+}
+
+.task h3, .draggable h3 {
+    color: #333; /* Consistent dark grey text */
+    font-size: 18px; /* Readable text size */
+}
+
+.task p, .draggable p {
+    color: #666; /* Lighter text for less emphasis */
+    font-size: 14px; /* Smaller text for secondary information */
+}
+
+.issue-creation-panel {
+    position: fixed; /* Fixed position to stay in view */
+    top: 0; /* Align to the top */
+    right: -100%; /* Start off-screen to the right */
+    width: 300px; /* Adequate width for content */
+    height: 100%; /* Full height to cover screen */
+    background: white; /* Solid white background */
+    transition: right 0.3s; /* Smooth transition for sliding in */
+    z-index: 1050; /* High z-index to overlay other content */
+}
+
+.modal-content {
+    padding: 20px; /* Padding inside the modal for spacing */
+}
+
+.form-group {
+    margin-bottom: 15px; /* Space between form inputs */
+}
+
+.close {
+    cursor: pointer; /* Pointer cursor on hover */
+    position: absolute; /* Position absolutely within parent */
+    right: 10px; /* 10 pixels from the right */
+    top: 10px; /* 10 pixels from the top */
+}
+
+@media (max-width: 768px) {
+    .btn {
+        width: 100%; /* Full width buttons on smaller screens */
+    }
+}
